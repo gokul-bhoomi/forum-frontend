@@ -3,21 +3,26 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Navbar from './components/layouts/Navbar';
 import home from './components/pages/Home';
+import post from './components/pages/Post';
 import DiscussState from './context/discuss/DiscussState';
+import UserState from './context/user/UserState';
 
 import './App.css';
 
 function App() {
   return (
     <DiscussState>
-      <Router>
-        <div className='App'>
-          <Navbar />
-          <Switch>
-            <Route path='/' component={home} />
-          </Switch>
-        </div>
-      </Router>
+      <UserState>
+        <Router>
+          <div className='App'>
+            <Navbar />
+            <Switch>
+              <Route exact path='/' component={home} />
+              <Route exact path='/post/:id' component={post} />
+            </Switch>
+          </div>
+        </Router>
+      </UserState>
     </DiscussState>
   );
 }

@@ -3,7 +3,7 @@ import discussContext from '../../context/discuss/discussContext';
 import Forumitems from './Forumitem';
 
 const Forum = () => {
-  const { clearState, details } = useContext(discussContext);
+  const { clearState, details, setCurrent } = useContext(discussContext);
 
   const onClick = () => {
     clearState();
@@ -13,7 +13,7 @@ const Forum = () => {
     <Fragment>
       <div className='container'>
         {details.map((items) => (
-          <Forumitems item={items} />
+          <Forumitems item={items} setCurrent={setCurrent} />
         ))}
         <button onClick={onClick} className='btn btn-dark'>
           Back to Search

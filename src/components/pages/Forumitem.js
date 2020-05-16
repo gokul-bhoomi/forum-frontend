@@ -1,23 +1,28 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const Forumitem = ({ item }) => {
+const Forumitem = ({ item, setCurrent }) => {
   const mystyle = {
     textAlign: 'center',
     paddingTop: '10px',
     paddingBottom: '10px',
   };
-
-  const [state, setstate] = useState(false);
-
+  const initialState = {
+    loading: false,
+    mouse: false,
+  };
+  const [state, setstate] = useState(initialState);
+  const onSubmit = () => {
+    setCurrent(item);
+  };
   return (
     <div
       className='card bg-light'
-      onMouseEnter={() => setstate(true)}
-      onMouseLeave={() => setstate(false)}
+      onMouseEnter={() => setstate({ mouse: true })}
+      onMouseLeave={() => setstate({ mouse: false })}
     >
-      {state ? (
-        <Link to={`/post/${item.id}`}>
+      {state.mouse ? (
+        <Link to={`/post/${item.id}`} onClick={onSubmit}>
           <h4 className='center'>Open</h4>
         </Link>
       ) : (

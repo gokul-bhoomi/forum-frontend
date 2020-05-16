@@ -1,4 +1,9 @@
-import { GET_DETAILS, CLEAR_STATE } from '../types';
+import {
+  GET_DETAILS,
+  CLEAR_STATE,
+  SET_CURRENT,
+  INCREMENT_LIKES,
+} from '../types';
 
 export default (state, action) => {
   switch (action.type) {
@@ -10,7 +15,15 @@ export default (state, action) => {
       return {
         details: [],
       };
-
+    case SET_CURRENT:
+      return {
+        ...state,
+        current: action.payload,
+      };
+    case INCREMENT_LIKES:
+      return {
+        ...state,
+      };
     default:
       return state;
   }

@@ -1,7 +1,13 @@
 import React, { useReducer } from 'react';
 import discussContext from './discussContext';
 import discussReducer from './discussReducer';
-import { GET_DETAILS, CLEAR_STATE } from '../types';
+import {
+  GET_DETAILS,
+  CLEAR_STATE,
+  SET_CURRENT,
+  INCREMENT_LIKES,
+  DECREMENT_LIKES,
+} from '../types';
 
 const DiscussState = (props) => {
   const initialState = {
@@ -33,7 +39,7 @@ const DiscussState = (props) => {
       {
         id: 4,
         user: 'Gokullll',
-        topic: ' Windows because concern sex its. ',
+        topic: ' Windows because concern  its. ',
         body: '<h1> Hello ML is the new Electricity !! </h1>',
         likes: 3,
         comments: 0,
@@ -47,6 +53,15 @@ const DiscussState = (props) => {
         comments: 0,
       },
     ],
+    current: {
+      id: 4,
+      user: 'Gokullll',
+      topic: ' Windows because concern  its. ',
+      body:
+        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
+      likes: 3,
+      comments: 0,
+    },
   };
 
   const [state, dispatch] = useReducer(discussReducer, initialState);
@@ -97,13 +112,27 @@ const DiscussState = (props) => {
   const clearState = () => {
     dispatch({ type: CLEAR_STATE });
   };
+  const setCurrent = (data) => {
+    dispatch({ type: SET_CURRENT, payload: data });
+  };
+
+  const incrementLike = () => {
+    dispatch({ type: INCREMENT_LIKES });
+  };
+  const decrementLike = () => {
+    dispatch({ type: DECREMENT_LIKES });
+  };
 
   return (
     <discussContext.Provider
       value={{
         details: state.details,
+        current: state.current,
         getDetails,
         clearState,
+        setCurrent,
+        incrementLike,
+        decrementLike,
       }}
     >
       {props.children}
