@@ -1,16 +1,24 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Navbar from './components/layouts/Navbar';
-import Search from './components/layouts/Search';
+import home from './components/pages/Home';
+import DiscussState from './context/discuss/DiscussState';
 
 import './App.css';
 
 function App() {
   return (
-    <div className='App'>
-      <Navbar />
-      <Search />
-    </div>
+    <DiscussState>
+      <Router>
+        <div className='App'>
+          <Navbar />
+          <Switch>
+            <Route path='/' component={home} />
+          </Switch>
+        </div>
+      </Router>
+    </DiscussState>
   );
 }
 

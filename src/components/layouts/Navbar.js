@@ -1,36 +1,26 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const Navbar = ({ icons, title }) => {
+const Navbar = () => {
   return (
     <nav className='navbar bg-form'>
       <h1>Aggregate | A forum for all</h1>
       <ul>
         <li>
-          <a href='/register' style={{ color: 'black' }}>
+          <Link to='/register' style={{ color: 'black' }}>
             {' '}
             <b> Register </b>
-          </a>
+          </Link>
         </li>
         <li>
-          <a href='/login' style={{ color: 'black' }}>
+          <Link to='/login' style={{ color: 'black' }}>
             {' '}
             <b> Login </b>
-          </a>
+          </Link>
         </li>
       </ul>
     </nav>
   );
-};
-Navbar.defaultProps = {
-  title: 'Github Finder',
-  icons: 'fab fa-github',
-};
-
-Navbar.propTypes = {
-  title: PropTypes.string.isRequired,
-  icon: PropTypes.string.isRequired,
 };
 
 export default Navbar;

@@ -18,7 +18,7 @@ body {
   font-size: 1rem;
   line-height: 1.6;
   background-color: #000000;
-  color: #333;
+  color: #fff;
 }
 
 a {
@@ -107,13 +107,45 @@ img {
   text-align: center;
 }
 
-/* Cards */
+/* s */
 .card {
+  width: 100%;
   padding: 1rem;
-  border: #ccc 1px dotted;
+  position: relative;
+  display: inline-block;
+  word-wrap: break-word;
   margin: 0.7rem 0;
+  animation-name: fade;
+  animation-duration: 3s;
+  animation-iteration-count: 1;
+  border-radius: 25px;
 }
 
+input[type='text'] {
+  width: 130px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-image: url('./media/search.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+.card-topleft {
+  position: absolute;
+  top: 5px;
+  left: 20px;
+}
+
+/* When the input field gets focus, change its width to 100% */
+input[type='text']:focus {
+  width: 100%;
+}
 /* List */
 .list {
   margin: 0.5rem 0;
@@ -193,7 +225,14 @@ img {
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 1rem;
 }
-
+.like {
+  position: absolute;
+  bottom: 0;
+  right: 20px;
+}
+.like i {
+  padding-left: 10px;
+}
 .btn {
   display: inline-block;
   background: var(--light-color);
@@ -205,6 +244,20 @@ img {
   margin-right: 0.5rem;
   transition: opacity 0.2s ease-in;
   outline: none;
+  border-radius: 25px;
+}
+
+.center {
+  display: block;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  text-align: center;
+
+  background-color: #ffffff;
+  border-style: dashed;
+  animation-name: fade;
+  animation-duration: 1s;
 }
 
 .btn-link {
@@ -260,8 +313,9 @@ img {
 .bg-light,
 .badge-light,
 .alert-light {
-  background: var(--light-color);
-  color: #333;
+  background: rgb(255, 108, 108);
+
+  color: rgb(228, 228, 228);
 }
 
 .btn-dark,
@@ -285,6 +339,12 @@ img {
 }
 .btn-search {
   color: #000000;
+}
+.list-grid {
+  display: block;
+  border: solid #fff;
+  border-width: 1px 1px;
+  margin-bottom: px;
 }
 
 .btn-danger,
@@ -318,7 +378,7 @@ img {
 
 .bg-light,
 .badge-light {
-  border: #ccc solid 1px;
+  border: rgb(0, 0, 0) solid 1px;
 }
 
 .round-img {
@@ -346,7 +406,6 @@ input {
   margin: 0 auto;
 }
 
-input[type='text'],
 input[type='email'],
 input[type='password'],
 input[type='date'],
@@ -404,6 +463,23 @@ table th {
   margin-right: 0.6rem;
 }
 
+.item-enter {
+  opacity: 0;
+}
+.item-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 /* Mobile Styles */
 @media (max-width: 700px) {
   .hide-sm {
@@ -439,4 +515,5 @@ table th {
     text-align: center;
     justify-content: center;
   }
+  /* Animation (Add After) */
 }
