@@ -295,6 +295,10 @@ input[type='text']:focus {
   padding-top: 10px;
   position: relative;
 }
+.title {
+  text-decoration: none;
+  color: rgb(3, 2, 2);
+}
 .center {
   display: block;
   padding-top: 20px;
@@ -498,13 +502,12 @@ table th {
 }
 
 .navbar a {
-  color: #fff;
   padding: 0.45rem;
   margin: 0 0.25rem;
 }
 
 .navbar a:hover {
-  color: var(--light-color);
+  opacity: 0.5;
 }
 
 .navbar .welcome span {

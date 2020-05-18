@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import logo from '../../media/logo.jpg';
 import discussContext from '../../context/discuss/discussContext';
 
@@ -13,7 +14,7 @@ const Search = () => {
   };
 
   const onSubmit = (e) => {
-    e.preventDefault();
+    //e.preventDefault();
     getDetails(e.target.value);
   };
 
@@ -25,12 +26,14 @@ const Search = () => {
           <input type='text' value={state} onChange={onChange} />
 
           <b>
-            <input
-              type='submit'
-              value='Search'
-              className='search btn-search btn-block'
-              onClick={onSubmit}
-            />
+            <Link to={'/list'}>
+              <button
+                className='search btn-search btn-block'
+                onClick={onSubmit}
+              >
+                Search
+              </button>
+            </Link>
           </b>
         </form>
       </div>

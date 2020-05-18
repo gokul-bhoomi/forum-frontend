@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <Fragment>
       {console.log(details.length)}
-      {details.length > 0 ? <Forum /> : <Search />}
+      <Search />
     </Fragment>
   );
 };
