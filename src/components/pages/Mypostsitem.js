@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const Forumitem = ({ id, name, topic, commentstotal, likes }) => {
+const Mypostsitem = ({ id, name, topic, commentstotal, likes }) => {
   const mystyle = {
     textAlign: 'center',
     paddingTop: '10px',
@@ -42,4 +42,4 @@ const Forumitem = ({ id, name, topic, commentstotal, likes }) => {
   );
 };
 
-export default Forumitem;
+export default Mypostsitem;

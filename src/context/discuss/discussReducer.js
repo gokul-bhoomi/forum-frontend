@@ -5,6 +5,7 @@ import {
   INCREMENT_LIKES,
   SET_LOADING,
   SET_TEXT,
+  GET_MYPOSTS,
 } from '../types';
 
 export default (state, action) => {
@@ -39,6 +40,9 @@ export default (state, action) => {
         ...state,
         loading: action.payload,
       };
+    }
+    case GET_MYPOSTS: {
+      return { ...state, myposts: action.payload };
     }
     default:
       return state;

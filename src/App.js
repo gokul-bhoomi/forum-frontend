@@ -9,6 +9,7 @@ import Login from './components/auth/Login';
 import forum from './components/pages/Forum';
 import Alert from './components/layouts/Alerts';
 import Post from './components/pages/Post';
+import Myposts from './components/pages/Myposts';
 
 import DiscussState from './context/discuss/DiscussState';
 import AlertState from './context/alert/AlertState';
@@ -32,6 +33,7 @@ function App() {
                 <Route exact path='/post' component={Post} />
                 <Route exact path='/register' component={Register} />
                 <Route exact path='/login' component={Login} />
+                <Route exact path='/myposts' component={Myposts} />
               </Switch>
             </div>
           </Router>

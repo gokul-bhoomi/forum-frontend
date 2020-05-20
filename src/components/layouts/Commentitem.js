@@ -9,9 +9,9 @@ const Commentitem = ({ item }) => {
   };
 
   return (
-    <div className='card bg-light'>
-      <p className='card-topleft'>Posted by: {item.user}</p>
-      <h3 style={mystyle}>{item.body}</h3>
+    <div className='card bg-primary'>
+      <p className='card-topleft'>Posted by: {item.name}</p>
+      <h3 style={mystyle}>{item.text}</h3>
     </div>
   );
 };

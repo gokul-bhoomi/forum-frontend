@@ -90,7 +90,7 @@ const Post = (props) => {
         </div>
       </div>
       <div className='discuss'>
-        <Comments />{' '}
+        <Comments {...props} />{' '}
       </div>
     </Fragment>
   );

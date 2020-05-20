@@ -22,13 +22,24 @@ const Navbar = () => {
           </Link>
         </li>
         {isAuthenticated ? (
-          <li>
-            {' '}
-            <b> {user ? user.name : ''} </b>
-            <Link style={{ color: 'black' }} onClick={onClick}>
-              <i class='fa fa-sign-out' aria-hidden='true'></i>
-            </Link>
-          </li>
+          <Fragment>
+            <li>
+              {' '}
+              <b>
+                {' '}
+                <Link to='/myposts' style={{ color: 'black' }}>
+                  My Posts
+                </Link>{' '}
+              </b>
+            </li>
+            <li>
+              {' '}
+              <b> {user ? user.name : ''} </b>
+              <Link style={{ color: 'black' }} onClick={onClick}>
+                <i class='fa fa-sign-out' aria-hidden='true'></i>
+              </Link>
+            </li>
+          </Fragment>
         ) : (
           <Fragment>
             <li>

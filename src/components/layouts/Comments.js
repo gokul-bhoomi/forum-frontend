@@ -7,10 +7,8 @@ import discussContext from '../../context/discuss/discussContext';
 import authContext from '../../context/auth/authContext';
 import alertContext from '../../context/alert/alertContext';
 
-const Comments = () => {
-  const { current, incrementLike, decrementLike, getForum } = useContext(
-    discussContext
-  );
+const Comments = (props) => {
+  const { current, addComment } = useContext(discussContext);
   const { loadUser, isAuthenticated, user, updateLikes } = useContext(
     authContext
   );
@@ -18,6 +16,20 @@ const Comments = () => {
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
+
+  const onClick = () => {
+    if (isAuthenticated === false)
+      setAlert('Please Login to comment', 'danger');
+    else {
+      if (comment === '') setAlert('Please enter something', 'danger');
+      else addComment(comment, props.match.params.id);
+    }
+  };
+  const onChange = (e) => {
+    setcomment(e.target.value);
+  };
+  const [comment, setcomment] = useState('');
+
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(5);
 
@@ -46,8 +58,14 @@ const Comments = () => {
         id='textarea'
         placeholder='Type your Opinion....'
         name='body'
+        onChange={onChange}
       />{' '}
-      <input type='submit' value='Discuss' className='btn btn-primary' />
+      <input
+        type='submit'
+        value='Discuss'
+        className='btn btn-primary'
+        onClick={onClick}
+      />
       <div>
         {currentPosts.map((items) => (
           <Commentitems item={items} />
@@ -59,7 +77,7 @@ const Comments = () => {
             <li key={number} className=''>
               <Link
                 onClick={() => paginate(number)}
-                to='/list'
+                to={`/discussforum/${props.match.params.id}`}
                 className={currentPage === number ? 'active' : ''}
               >
                 {number}

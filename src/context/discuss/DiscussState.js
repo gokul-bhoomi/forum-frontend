@@ -11,6 +11,7 @@ import {
   DECREMENT_LIKES,
   SET_LOADING,
   SET_TEXT,
+  GET_MYPOSTS,
 } from '../types';
 
 const DiscussState = (props) => {
@@ -19,6 +20,7 @@ const DiscussState = (props) => {
     current: null,
     loading: false,
     text: '',
+    myposts: [],
   };
 
   const [state, dispatch] = useReducer(discussReducer, initialState);
@@ -78,6 +80,21 @@ const DiscussState = (props) => {
     const res = await axios.post('/api/forums/post', req, config);
     setCurrent(res.data);
   };
+  const addComment = async (comment, id) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    const req = { body: comment };
+
+    const res = await axios.put('/api/forums/comments/' + id, req, config);
+    setCurrent(res.data);
+  };
+  const getmyposts = async () => {
+    const res = await axios.get('/api/forums/myposts');
+    dispatch({ type: GET_MYPOSTS, payload: res.data });
+  };
 
   return (
     <discussContext.Provider
@@ -86,7 +103,8 @@ const DiscussState = (props) => {
         current: state.current,
         loading: state.loading,
         text: state.text,
-
+        myposts: state.myposts,
+        getmyposts,
         getDetails,
         clearState,
         setCurrent,
@@ -95,6 +113,7 @@ const DiscussState = (props) => {
         setLoading,
         setText,
         getForum,
+        addComment,
       }}
     >
       {props.children}

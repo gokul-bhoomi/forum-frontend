@@ -1,32 +1,29 @@
 import React, { useContext, Fragment, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import discussContext from '../../context/discuss/discussContext';
-import Forumitems from './Forumitem';
+import Mypostssitem from './Mypostsitem';
 import Spinner from '../layouts/Spinner';
 import authContext from '../../context/auth/authContext';
 
 const Forum = () => {
-  const { details, setCurrent, loading, setLoading, getDetails } = useContext(
+  const { myposts, setCurrent, loading, setLoading, getmyposts } = useContext(
     discussContext
   );
+  useEffect(() => {
+    if (localStorage.getItem('token')) loadUser();
+    getmyposts();
+
+    //eslint-disable-next-line;
+  }, []);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(7);
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = details.slice(indexOfFirstPost, indexOfLastPost);
-  const totalPosts = details.length;
+  const currentPosts = myposts.slice(indexOfFirstPost, indexOfLastPost);
+  const totalPosts = myposts.length;
   const { loadUser } = useContext(authContext);
-  useEffect(() => {
-    if (localStorage.getItem('token')) loadUser();
-    //eslint-disable-next-line;
-  }, []);
-  useEffect(() => {
-    if (details.length !== 0) {
-    } else getDetails(localStorage.getItem('text'));
-    //eslint-disable-next-line;
-  }, [discussContext]);
 
   const paginate = (pageNumber) => {
     setLoading(true);
@@ -38,7 +35,6 @@ const Forum = () => {
   const onClick = () => {
     localStorage.setItem('text', '');
   };
-
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
@@ -52,7 +48,7 @@ const Forum = () => {
       ) : (
         <div className='container'>
           {currentPosts.map((items) => (
-            <Forumitems
+            <Mypostssitem
               id={items._id}
               name={items.name}
               topic={items.topic}
@@ -61,7 +57,7 @@ const Forum = () => {
               setCurrent={setCurrent}
             />
           ))}
-          {details.length === 0 ? (
+          {myposts.length === 0 ? (
             <h2 style={{ textAlign: 'center' }}> No Forum Found </h2>
           ) : (
             ''
@@ -83,7 +79,7 @@ const Forum = () => {
                 <li key={number} className=''>
                   <Link
                     onClick={() => paginate(number)}
-                    to='/list'
+                    to='/myposts'
                     className={currentPage === number ? 'active' : ''}
                   >
                     {number}
