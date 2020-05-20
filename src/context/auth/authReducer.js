@@ -7,6 +7,7 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   CLEAR_ERRORS,
+  UPDATE_LIKES,
 } from '../types';
 
 export default (state, action) => {
@@ -59,5 +60,13 @@ export default (state, action) => {
         error: action.payload,
       };
     }
+    case UPDATE_LIKES: {
+      return {
+        ...state,
+        user: action.payload,
+      };
+    }
+    default:
+      return { state };
   }
 };

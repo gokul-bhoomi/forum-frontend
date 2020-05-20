@@ -3,28 +3,40 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Navbar from './components/layouts/Navbar';
 import home from './components/pages/Home';
-import post from './components/pages/Post';
-import DiscussState from './context/discuss/DiscussState';
-import UserState from './context/user/UserState';
+import DF from './components/pages/DiscussionForum';
+import Register from './components/auth/Register';
+import Login from './components/auth/Login';
 import forum from './components/pages/Forum';
+import Alert from './components/layouts/Alerts';
+import Post from './components/pages/Post';
+
+import DiscussState from './context/discuss/DiscussState';
+import AlertState from './context/alert/AlertState';
+import AuthState from './context/auth/AuthState';
 
 import './App.css';
 
 function App() {
   return (
     <DiscussState>
-      <UserState>
-        <Router>
-          <div className='App'>
-            <Navbar />
-            <Switch>
-              <Route exact path='/' component={home} />
-              <Route exact path='/list' component={forum} />
-              <Route exact path='/post/:id' component={post} />
-            </Switch>
-          </div>
-        </Router>
-      </UserState>
+      <AlertState>
+        <AuthState>
+          <Router>
+            <div className='App'>
+              <Navbar />
+              <Alert />
+              <Switch>
+                <Route exact path='/' component={home} />
+                <Route exact path='/list' component={forum} />
+                <Route exact path='/discussforum/:id' component={DF} />
+                <Route exact path='/post' component={Post} />
+                <Route exact path='/register' component={Register} />
+                <Route exact path='/login' component={Login} />
+              </Switch>
+            </div>
+          </Router>
+        </AuthState>
+      </AlertState>
     </DiscussState>
   );
 }

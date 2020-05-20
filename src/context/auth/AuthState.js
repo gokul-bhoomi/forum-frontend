@@ -12,6 +12,7 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   CLEAR_ERRORS,
+  UPDATE_LIKES,
 } from '../types';
 const AuthState = (props) => {
   const initialState = {
@@ -78,7 +79,22 @@ const AuthState = (props) => {
   const clearErrors = () => {
     dispatch({ type: CLEAR_ERRORS });
   };
+  // Add Like
+  const updateLikes = async (req) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    req = JSON.stringify(req);
 
+    try {
+      const res = await axios.put('/api/users', req, config);
+      dispatch({ type: UPDATE_LIKES, payload: res.data });
+    } catch (err) {
+      console.error(err);
+    }
+  };
   return (
     <authContext.Provider
       value={{
@@ -92,6 +108,7 @@ const AuthState = (props) => {
         loadUser,
         login,
         logout,
+        updateLikes,
       }}
     >
       {props.children}

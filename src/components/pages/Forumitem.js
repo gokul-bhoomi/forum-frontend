@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const Forumitem = ({ item, setCurrent }) => {
+const Forumitem = ({ item }) => {
   const mystyle = {
     textAlign: 'center',
     paddingTop: '10px',
@@ -12,9 +12,7 @@ const Forumitem = ({ item, setCurrent }) => {
     mouse: false,
   };
   const [state, setstate] = useState(initialState);
-  const onSubmit = () => {
-    setCurrent(item);
-  };
+
   return (
     <div
       className='card bg-light'
@@ -22,12 +20,12 @@ const Forumitem = ({ item, setCurrent }) => {
       onMouseLeave={() => setstate({ mouse: false })}
     >
       {state.mouse ? (
-        <Link to={`/post/${item.id}`} onClick={onSubmit}>
+        <Link to={`/discussforum/${item._id}`}>
           <h4 className='center'>Open</h4>
         </Link>
       ) : (
         <div>
-          <p className='card-topleft'>Posted by: {item.user}</p>
+          <p className='card-topleft'>Posted by: {item.name}</p>
           <h3 style={mystyle}>{item.topic}</h3>
 
           <div className='like'>

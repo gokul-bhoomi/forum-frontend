@@ -1,21 +1,29 @@
-import React, { Fragment, useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Fragment, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import logo from '../../media/logo.jpg';
 import discussContext from '../../context/discuss/discussContext';
+import alertContext from '../../context/alert/alertContext';
 
 const Search = () => {
   const DiscussContext = useContext(discussContext);
-  const { getDetails } = DiscussContext;
+  const { getDetails, text, setText } = DiscussContext;
 
-  const [state, setstate] = useState('');
+  const { setAlert } = useContext(alertContext);
+  const history = useHistory();
 
   const onChange = (e) => {
-    setstate(e.target.value);
+    setText(e.target.value);
+    localStorage.setItem('text', e.target.value);
   };
 
   const onSubmit = (e) => {
-    //e.preventDefault();
-    getDetails(e.target.value);
+    e.preventDefault();
+    if (text === '') {
+      setAlert(' No text Entered', 'danger');
+    } else {
+      history.push('/list');
+      getDetails(text);
+    }
   };
 
   return (
@@ -23,17 +31,17 @@ const Search = () => {
       <img src={logo} className='logo' alt='logo' />
       <div className='container'>
         <form className='form'>
-          <input type='text' value={state} onChange={onChange} />
+          <input
+            type='text'
+            value={text}
+            onChange={onChange}
+            className='text'
+          />
 
           <b>
-            <Link to={'/list'}>
-              <button
-                className='search btn-search btn-block'
-                onClick={onSubmit}
-              >
-                Search
-              </button>
-            </Link>
+            <button className='search btn-search btn-block' onClick={onSubmit}>
+              Search
+            </button>
           </b>
         </form>
       </div>

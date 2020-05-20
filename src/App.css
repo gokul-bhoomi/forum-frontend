@@ -107,7 +107,29 @@ img {
   align-items: center;
   text-align: center;
 }
+.pagination {
+  display: inline;
+}
 
+.pagination a {
+  color: rgb(255, 255, 255);
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  border: 1px solid rgb(195, 255, 0);
+  margin: 0 4px;
+}
+
+.pagination a.active {
+  background-color: #e43131;
+  color: rgb(21, 207, 30);
+  border: 1px solid #000000;
+}
+
+.pagination a:hover:not(.active) {
+  background-color: #ddd;
+}
 /* s */
 .card {
   width: 100%;
@@ -117,12 +139,12 @@ img {
   word-wrap: break-word;
   margin: 0.7rem 0;
   animation-name: fade;
-  animation-duration: 3s;
+  animation-duration: 2s;
   animation-iteration-count: 1;
   border-radius: 25px;
 }
 
-input[type='text'] {
+.text {
   width: 130px;
   box-sizing: border-box;
   border: 2px solid #ccc;
@@ -144,7 +166,7 @@ input[type='text'] {
 }
 
 /* When the input field gets focus, change its width to 100% */
-input[type='text']:focus {
+.text:focus {
   width: 100%;
 }
 /* List */
@@ -311,7 +333,9 @@ input[type='text']:focus {
   animation-name: fade;
   animation-duration: 1s;
 }
-
+.textarea {
+  background-color: blanchedalmond;
+}
 .btn-link {
   background: none;
   padding: 0;
@@ -462,6 +486,7 @@ input[type='email'],
 input[type='password'],
 input[type='date'],
 select,
+.name,
 textarea {
   display: block;
   width: 100%;
@@ -520,6 +545,11 @@ table th {
 .item-enter-active {
   opacity: 1;
   transition: opacity 500ms ease-in;
+}
+.form-container {
+  display: block;
+  margin: auto;
+  width: 30%;
 }
 
 @keyframes fade {
