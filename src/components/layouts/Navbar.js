@@ -1,11 +1,14 @@
 import React, { useContext, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import authContext from '../../context/auth/authContext';
+import discussContext from '../../context/discuss/discussContext';
 
 const Navbar = () => {
   const { isAuthenticated, logout, user } = useContext(authContext);
+  const { clearState } = useContext(discussContext);
   const onClick = (props) => {
     logout();
+    clearState();
   };
   return (
     <nav className='navbar bg-form'>

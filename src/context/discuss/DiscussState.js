@@ -12,6 +12,7 @@ import {
   SET_LOADING,
   SET_TEXT,
   GET_MYPOSTS,
+  UPDATE_POST,
 } from '../types';
 
 const DiscussState = (props) => {
@@ -32,15 +33,21 @@ const DiscussState = (props) => {
       },
     };
     const req = { text: textt };
-    setLoading(true);
-    const res = await axios.post('/api/forums/post', req, config);
-    setTimeout(() => {
+    try {
+      setLoading(true);
+
+      const res = await axios.post('/api/forums/post', req, config);
+      setTimeout(() => {
+        setLoading(false);
+      }, 1500);
+      dispatch({
+        type: GET_DETAILS,
+        payload: res.data,
+      });
+    } catch (err) {
       setLoading(false);
-    }, 1500);
-    dispatch({
-      type: GET_DETAILS,
-      payload: res.data,
-    });
+      console.error(err);
+    }
   };
   const clearState = () => {
     dispatch({ type: CLEAR_STATE });
@@ -80,20 +87,51 @@ const DiscussState = (props) => {
     const res = await axios.post('/api/forums/post', req, config);
     setCurrent(res.data);
   };
-  const addComment = async (comment, id) => {
+  const addComment = async (comment, id, d) => {
     const config = {
       headers: {
         'Content-Type': 'application/json',
       },
     };
-    const req = { body: comment };
+    const req = { body: comment, date: d };
 
     const res = await axios.put('/api/forums/comments/' + id, req, config);
     setCurrent(res.data);
   };
   const getmyposts = async () => {
-    const res = await axios.get('/api/forums/myposts');
-    dispatch({ type: GET_MYPOSTS, payload: res.data });
+    try {
+      setLoading(true);
+
+      const res = await axios.get('/api/forums/myposts');
+      dispatch({ type: GET_MYPOSTS, payload: res.data });
+      setLoading(false);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  const deletePost = async (id) => {
+    setLoading(true);
+    const res = await axios.delete('/api/forums/' + id);
+    getmyposts();
+  };
+  const updatePost = async (text, id) => {
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+      const req = { text };
+      setLoading(true);
+
+      const res = await axios.put('/api/forums/post/' + id, req, config);
+      setCurrent(res.data);
+      setCurrent(res.data);
+
+      setLoading(false);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -114,6 +152,8 @@ const DiscussState = (props) => {
         setText,
         getForum,
         addComment,
+        deletePost,
+        updatePost,
       }}
     >
       {props.children}

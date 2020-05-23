@@ -17,3 +17,4 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const GET_MYPOSTS = 'GET_MYPOSTS';
+export const UPDATE_POST = 'UPDATE_POST';

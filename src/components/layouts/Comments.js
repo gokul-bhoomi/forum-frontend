@@ -22,7 +22,11 @@ const Comments = (props) => {
       setAlert('Please Login to comment', 'danger');
     else {
       if (comment === '') setAlert('Please enter something', 'danger');
-      else addComment(comment, props.match.params.id);
+      else {
+        var d = new Date().toString();
+        //d = d.split('/').reverse().join('-');
+        addComment(comment, props.match.params.id, d);
+      }
     }
   };
   const onChange = (e) => {
@@ -37,7 +41,7 @@ const Comments = (props) => {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   var currentPosts = [];
   var totalPosts = 0;
-  if (current !== null) {
+  if (current) {
     currentPosts = current.comments.slice(indexOfFirstPost, indexOfLastPost);
     totalPosts = current.comments.length;
   }

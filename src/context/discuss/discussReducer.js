@@ -6,6 +6,7 @@ import {
   SET_LOADING,
   SET_TEXT,
   GET_MYPOSTS,
+  UPDATE_POST,
 } from '../types';
 
 export default (state, action) => {
@@ -14,7 +15,6 @@ export default (state, action) => {
       return {
         ...state,
         details: action.payload,
-        text: '',
       };
     case SET_TEXT:
       return {
@@ -24,8 +24,14 @@ export default (state, action) => {
     case CLEAR_STATE:
       return {
         details: [],
+        mypost: [],
       };
     case SET_CURRENT:
+      return {
+        ...state,
+        current: action.payload,
+      };
+    case UPDATE_POST:
       return {
         ...state,
         current: action.payload,
@@ -44,6 +50,7 @@ export default (state, action) => {
     case GET_MYPOSTS: {
       return { ...state, myposts: action.payload };
     }
+
     default:
       return state;
   }

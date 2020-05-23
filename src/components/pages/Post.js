@@ -31,7 +31,6 @@ const Post = () => {
     };
 
     try {
-      console.log('HIOiii');
       setLoading(true);
       await axios.post('/api/forums', post, config);
       setTimeout(() => {

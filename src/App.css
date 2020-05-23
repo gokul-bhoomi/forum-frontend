@@ -20,6 +20,7 @@ body {
   line-height: 1.6;
   background-color: #000000;
   color: #fff;
+  margin-bottom: 50px;
 }
 
 a {
@@ -144,6 +145,7 @@ img {
   animation-duration: 2s;
   animation-iteration-count: 1;
   border-radius: 25px;
+  overflow: auto;
 }
 
 .text {
@@ -161,6 +163,17 @@ img {
   transition: width 0.4s ease-in-out;
 }
 
+.card-topright {
+  position: absolute;
+  top: 5px;
+  right: 20px;
+}
+
+.card-topleft {
+  position: absolute;
+  top: 5px;
+  left: 20px;
+}
 .card-topleft {
   position: absolute;
   top: 5px;
@@ -251,10 +264,12 @@ img {
   grid-gap: 1rem;
 }
 .like {
-  position: absolute;
-  bottom: 0;
+  position: relative;
+  bottom: 0px;
   right: 20px;
+  float: right;
 }
+
 .like i {
   padding-left: 10px;
 }

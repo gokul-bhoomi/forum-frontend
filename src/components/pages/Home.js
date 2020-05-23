@@ -11,7 +11,6 @@ const Home = () => {
   const { details } = useContext(discussContext);
   return (
     <Fragment>
-      {console.log(details.length)}
       <Search />
     </Fragment>
   );

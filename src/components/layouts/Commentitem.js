@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 
 const Commentitem = ({ item }) => {
   const mystyle = {
@@ -11,6 +10,7 @@ const Commentitem = ({ item }) => {
   return (
     <div className='card bg-primary'>
       <p className='card-topleft'>Posted by: {item.name}</p>
+      <p className='card-topright'>On: {item.date.substr(4, 11)}</p>
       <h3 style={mystyle}>{item.text}</h3>
     </div>
   );
